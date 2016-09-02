@@ -24,7 +24,7 @@ type fileLink struct {
 
 func newFile(n dag.Node) (*file, error) {
   f := &file{}
-  err := n.Unmarshal(f)
+  err := n.UnmarshalTo(f)
   if err != nil {
     return nil, err
   }
@@ -68,8 +68,8 @@ func (f *file) GetNode(p Path) (Node, error) {
   return nil, ipld.ErrParse
 }
 
-// Unmarshal unmarshals
-func (f *file) Unmarshal(v interface{}) error {
+// UnmarshalTo
+func (f *file) UnmarshalTo(v interface{}) error {
   switch v := v.(type) {
   case []byte:
     _, err := io.ReadFull(f, v)
@@ -78,4 +78,9 @@ func (f *file) Unmarshal(v interface{}) error {
   default:
     return ipld.ErrParse
   }
+}
+
+// UnmarshalBlock
+func (f *file) UnmarshalBlock(b block.Block) error {
+  return ipld.UnmarshalBlockTo(b, f)
 }

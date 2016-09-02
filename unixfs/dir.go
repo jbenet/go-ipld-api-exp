@@ -27,7 +27,7 @@ type DirEntry struct {
 
 func newDir(n dag.Node) (*dir, error) {
   d := &dir{}
-  err := n.Unmarshal(d)
+  err := n.UnmarshalTo(d)
   if err != nil {
     return nil, err
   }
@@ -78,8 +78,8 @@ func (d *dir) GetNode(p Path) (Node, error) {
   return e.link.GetNode(s[1:])
 }
 
-// Unmarshal unmarshals
-func (d *dir) Unmarshal(v interface{}) error {
+// UnmarshalTo unmarshals
+func (d *dir) UnmarshalTo(v interface{}) error {
   switch v := v.(type) {
   case []string: // list of filenames
     v = d.Links()

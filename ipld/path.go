@@ -14,7 +14,7 @@ type Path string
 
 func PathSplit(p Path) []string {
   s := strings.Split(p, "/")
-  if s[0] == "" {
+  if s[0] == "" && len(s) > 1{
     s = s[1:]
   }
   return s

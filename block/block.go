@@ -6,3 +6,11 @@ type Block interface {
 
   Data() []byte
 }
+
+type BlockMarshaler interface {
+  MarshalBlock() (Block, error)
+}
+
+type BlockUnmarshaler interface {
+  UnmarshalBlock(Block) error
+}
