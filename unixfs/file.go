@@ -43,7 +43,7 @@ func (f *file) Subfile(i int) (f2 *file, err error) {
   if i < 0 || i >= len(f.subfiles) {
     return nil, ipld.ErrParse // invalid.
   }
-  return newFile(f.subfiles[i].GetNode())
+  return newFile(f.subfiles[i].link.GetNode())
 }
 
 func (f *file) Reader() Reader {
